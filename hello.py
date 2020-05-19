@@ -1,11 +1,10 @@
-import subprocess
-import threading
-def runFile(str):
-    subprocess.run(["python3", str])
 
-t1 = threading.Thread(target=runFile,args=("abc.py",), name='t1')
-t2 = threading.Thread(target=runFile,args=("abc1.py",), name='t1')
-t3 = threading.Thread(target=runFile,args=("server.py",), name='t1')
-t1.start()
-t2.start()
-t3.start()
+while 1:
+    if contract.receiveData().call()==true:
+        address=contract.recieveAddress().call()
+        if PORT=="8888":
+                contract.send(sender=address[2])
+        elif PORT=="8889":
+                contract.send(sender=address[3])
+        elif PORT=="8890":
+                contract.send(sender=address[4])
