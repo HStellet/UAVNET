@@ -12,14 +12,14 @@ contract DataSending is Registration{
 
     successful=false;
 
-    routeTable[registered[1].publicKey].push(registered[2].publicKey);
-    routeTable[registered[2].publicKey].push(registered[1].publicKey);
-    routeTable[registered[2].publicKey].push(registered[3].publicKey);
-    routeTable[registered[3].publicKey].push(registered[2].publicKey);
-    routeTable[registered[3].publicKey].push(registered[4].publicKey);
-    routeTable[registered[4].publicKey].push(registered[3].publicKey);
+    routeTable[registered[1].publicKey].push(registered[4].publicKey);
+    routeTable[registered[4].publicKey].push(registered[1].publicKey);
     routeTable[registered[4].publicKey].push(registered[5].publicKey);
     routeTable[registered[5].publicKey].push(registered[4].publicKey);
+    routeTable[registered[5].publicKey].push(registered[6].publicKey);
+    routeTable[registered[6].publicKey].push(registered[5].publicKey);
+    routeTable[registered[6].publicKey].push(registered[2].publicKey);
+    routeTable[registered[2].publicKey].push(registered[6].publicKey);
 
   }
 
@@ -57,6 +57,8 @@ contract DataSending is Registration{
       registered[pubToMac[msg.sender]].blacklist=0;
       registered[pubToMac[msg.sender]].penaltytoken=0;
       registered[pubToMac[msg.sender]].participating=0;
+      registered[pubToMac[msg.sender]].bcs=0;
+
     }
     else if((pubToMac[msg.sender]==0 && msg.value!=5 ether)||(pubToMac[msg.sender]!=0 && msg.value!=1 ether))
       return;
@@ -83,7 +85,7 @@ contract DataSending is Registration{
   function updateGraph() public
   {
 
-    require((msg.sender==source || msg.sender==BCS["B1"].publicKey || msg.sender==BCS["B2"].publicKey || msg.sender==BCS["B3"].publicKey) && transaction==true);
+    require((msg.sender==source || msg.sender==registered[1].publicKey || msg.sender==registered[2].publicKey || msg.sender==registered[3].publicKey) && transaction==true);
     for(uint i=0;i<list.length;i++)
     {
       routeTable[registered[list[i]].publicKey].length=0;
@@ -92,7 +94,7 @@ contract DataSending is Registration{
         if(i!=j)
         {
             int distance=(registered[list[i]].x-registered[list[j]].x)*(registered[list[i]].x-registered[list[j]].x) + (registered[list[i]].y-registered[list[j]].y)*(registered[list[i]].y-registered[list[j]].y) + (registered[list[i]].z-registered[list[j]].z)*(registered[list[i]].z-registered[list[j]].z);
-            if(distance<=1)
+            if(distance<=4)
             {
               routeTable[registered[list[i]].publicKey].push(registered[list[j]].publicKey);
             }
@@ -189,7 +191,7 @@ contract DataSending is Registration{
   }
   function abort() public{
 
-    require((msg.sender==BCS["B1"].publicKey || msg.sender==BCS["B2"].publicKey || msg.sender==BCS["B3"].publicKey));
+    require((msg.sender==registered[1].publicKey || msg.sender==registered[2].publicKey || msg.sender==registered[3].publicKey));
     if(transaction==false)
     {
       uint count1=0;
