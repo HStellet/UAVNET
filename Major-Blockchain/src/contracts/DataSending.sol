@@ -213,7 +213,7 @@ contract DataSending is Registration{
       count++;
   }
   function getData() public view returns (string memory) {
-      require(msg.sender==registered[Route[count].id].publicKey);
+
       return Route[count].data;
   }
   function abort() public{
