@@ -48,6 +48,10 @@ contract PathFind is DataSending{
       if(bfs(pred)==false){
           Route.length=0;
           sendBackToken();
+          count=0;
+          source=0x0000000000000000000000000000000000000000;
+          destination=0x0000000000000000000000000000000000000000;
+          transaction=false;
           emit x3(false);
           return;
       }

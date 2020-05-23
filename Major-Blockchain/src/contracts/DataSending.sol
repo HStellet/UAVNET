@@ -7,8 +7,7 @@ contract DataSending is Registration{
   bool successful;
   address payable culprit;
   uint count=0;
-  event x1(
-        uint a);
+
   mapping (address => address[]) routeTable;
 
   constructor() public{
@@ -30,7 +29,8 @@ contract DataSending is Registration{
 
   function registerCoordinates(int[] memory coordinates) public payable
   {
-    if(pubToMac[msg.sender]!=0 && registered[pubToMac[msg.sender]].faulty==0)
+    require(transaction==true && registered[pubToMac[msg.sender]].faulty==0);
+    if(pubToMac[msg.sender]!=0)
     {
       if(registered[pubToMac[msg.sender]].bcs==0 && registered[pubToMac[msg.sender]].participating==0 && msg.value==1 ether)
       {
@@ -39,40 +39,8 @@ contract DataSending is Registration{
       else
         return;
     }
-
-    else if(pubToMac[msg.sender]==0 && msg.value==5 ether && blacklisted[msg.sender]==0)
-    {
-      list.push(list.length+1);
-      pubToMac[msg.sender]=list.length;
-      registered[pubToMac[msg.sender]].publicKey=msg.sender;
-      registered[pubToMac[msg.sender]].encrypt=string(msg.data);
-      registered[pubToMac[msg.sender]].faulty=0;
-      registered[pubToMac[msg.sender]].penaltytoken=0;
-      registered[pubToMac[msg.sender]].participating=0;
-      registered[pubToMac[msg.sender]].bcs=0;
-
-    }
-    else if(blacklisted[msg.sender]>=0 && blacklisted[msg.sender]<=10)
-    {
-        if(registered[pubToMac[msg.sender]].penaltytoken == msg.value && (now-registered[pubToMac[msg.sender]].timestamp)<=registered[pubToMac[msg.sender]].faulty)
-        {
-          registered[pubToMac[msg.sender]].penaltytoken=0;
-          registered[pubToMac[msg.sender]].faulty=0;
-          registered[pubToMac[msg.sender]].participating=1;
-        }
-        else if( (now-registered[pubToMac[msg.sender]].timestamp)>registered[pubToMac[msg.sender]].faulty)
-        {
-            registered[pubToMac[msg.sender]].penaltytoken+=2;
-            registered[pubToMac[msg.sender]].faulty+=10;
-            return;
-        }
-        else if(registered[pubToMac[msg.sender]].penaltytoken == msg.value && (now-registered[pubToMac[msg.sender]].timestamp)<=registered[pubToMac[msg.sender]].faulty)
-        {
-            return;
-        }
-    }
-    else if(blacklisted[msg.sender]>10)
-        return;
+    else
+      return;
     registered[pubToMac[msg.sender]].x=coordinates[0];
     registered[pubToMac[msg.sender]].y=coordinates[1];
     registered[pubToMac[msg.sender]].z=coordinates[2];
@@ -95,8 +63,8 @@ contract DataSending is Registration{
     {
 
       routeTable[registered[list[i]].publicKey].length=0;
-      emit x1(registered[list[i]].participating);
-        emit x1(list[i]);
+      // emit x1(registered[list[i]].participating);
+      //   emit x1(list[i]);
       if(registered[list[i]].participating==1){
       for(uint j=0;j<list.length;j++)
       {
@@ -123,8 +91,8 @@ contract DataSending is Registration{
             destination=0x0000000000000000000000000000000000000000;
             sendBackToken();
         }
-    else
-        return false;
+        else
+          return false;
   }
 
   function sendBackToken() public payable
@@ -143,8 +111,7 @@ contract DataSending is Registration{
   }
   function unsuccessful(uint x) public payable {
 
-      require(msg.sender==destination && now-timestamp>30);
-
+      require(msg.sender==destination);
       transaction=false;
       successful=false;
       if(x==0)
@@ -174,12 +141,6 @@ contract DataSending is Registration{
         }
       }
       sendBackToken();
-      Route.length=0;
-      count=0;
-      source=0x0000000000000000000000000000000000000000;
-      destination=0x0000000000000000000000000000000000000000;
-      returnCulprit();
-
   }
   function returnCulprit() public view returns(address payable)
   {
@@ -190,7 +151,9 @@ contract DataSending is Registration{
 
       require(msg.sender==source && transaction==true && successful==true);
       count=0;
-      uint divide=msg.value/(Route.length-2);
+      uint divide=0;
+      if(Route.length-2!=0)
+        divide=msg.value/(Route.length-2);
       for(uint i=1;i<Route.length-1;i++)
       {
         registered[Route[i].id].publicKey.transfer(divide);
@@ -213,21 +176,18 @@ contract DataSending is Registration{
       count++;
   }
   function getData() public view returns (string memory) {
-
+    if(msg.sender==registered[Route[count].id].publicKey)
       return Route[count].data;
+    else
+      return "";
   }
   function abort() public{
-
-    require(msg.sender==registered[1].publicKey || msg.sender==registered[2].publicKey || msg.sender==registered[3].publicKey);
-     uint count1=0;
+    uint count1=0;
       uint[] memory list1=new uint[](list.length);
       for(uint i=0;i<list.length;i++)
       {
-        if(registered[list[i]].bcs==0 && registered[list[i]].participating==1)
-        {
-            registered[list[i]].participating=0;
+        pubToMac[registered[list[i]].publicKey]=0;
 
-        }
         routeTable[registered[list[i]].publicKey].length=0;
         if(blacklisted[registered[list[i]].publicKey]<10)
         {
@@ -238,7 +198,6 @@ contract DataSending is Registration{
         {
             delete registered[list[i]];
         }
-        delete pubToMac[registered[list[i]].publicKey];
       }
       delete list;
       for(uint i=0;i<count1;i++)
@@ -252,16 +211,18 @@ contract DataSending is Registration{
       }
       delete list1;
 
+      Route.length=0;
+      transaction=false;
+      successful=false;
+      count=0;
+      source=0x0000000000000000000000000000000000000000;
+      destination=0x0000000000000000000000000000000000000000;
 
 
-    Route.length=0;
-    transaction=false;
-    successful=false;
-    count=0;
-    source=0x0000000000000000000000000000000000000000;
-    destination=0x0000000000000000000000000000000000000000;
-
-
+  }
+  function getRegistered() public view returns(IOT memory,uint,uint)
+  {
+    return (registered[pubToMac[msg.sender]],blacklisted[msg.sender],pubToMac[msg.sender]);
   }
 
 }

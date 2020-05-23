@@ -72,7 +72,7 @@ contract Registration{
     registered[7]=IOT(0x34dCf4e9c4B0eD9F835c5B4173B2d90804b2a11f,"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMJlsg3FieJsbC9xLGyFC8MdkE\n9V0Yc33WjuZqU6ca7y7K3AUu+TsMYsKGAhQJvcNu5PxwZwfkudY+wIm//NroSt3s\nGhrMkaNoFTAW1Uc8Q5Y77K1L/kp9M0be0UXXG5Qb3QZ/dczEDDpnm0iLHusTYz7R\nnwOiJTtf9eGt5ClZ4wIDAQAB\n-----END PUBLIC KEY-----",0,0,4,4,0,0,0,0);
     registered[8]=IOT(0x5aF5E7EACd4552ED39E40aa82B2FA164b6A441a8,"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD1UmkFyvP4PR6ceMCU9xiTBvA5\nRHi7Q4W/XdrlRoqXH4tBgwtXPObLcppjtGcgsFt6gu7U82Wk1OZ8iREOyY1uNTKD\n+aT3fXLtGbW6KDifeM5E69DOP2Vjfx61biCCNrjyMZj5qJvbinNvCo/Q37+0dGuU\npKZ992fW4FzFTBMKvQIDAQAB\n-----END PUBLIC KEY-----",0,0,4,2,0,0,0,0);
 
-
+    blacklisted[0x23018548f67d4a0fF7027dB2870d61cA6D88b818]=10;
     pubToMac[registered[1].publicKey]=1;
     pubToMac[registered[2].publicKey]=2;
     pubToMac[registered[3].publicKey]=3;
@@ -93,5 +93,47 @@ contract Registration{
     list.push(8);
 
   }
+  function registration(string memory pubkey) public payable{
+    if(pubToMac[msg.sender]==0 && blacklisted[msg.sender]==0 && msg.value==5 ether)
+    {
+      list.push(list.length+1);
+      pubToMac[msg.sender]=list.length;
+      registered[pubToMac[msg.sender]].publicKey=msg.sender;
+      registered[pubToMac[msg.sender]].encrypt=pubkey;
+      registered[pubToMac[msg.sender]].faulty=0;
+      registered[pubToMac[msg.sender]].penaltytoken=0;
+      registered[pubToMac[msg.sender]].participating=0;
+      registered[pubToMac[msg.sender]].bcs=0;
+      registered[pubToMac[msg.sender]].x=0;
+      registered[pubToMac[msg.sender]].y=0;
+      registered[pubToMac[msg.sender]].z=0;
 
+    }
+    else
+      return;
+  }
+  function removeFromFaulty() public payable{
+    if(pubToMac[msg.sender]!=0 && registered[pubToMac[msg.sender]].faulty!=0)
+    {
+        if(registered[pubToMac[msg.sender]].penaltytoken == msg.value && (now-registered[pubToMac[msg.sender]].timestamp)<=registered[pubToMac[msg.sender]].faulty)
+        {
+          registered[pubToMac[msg.sender]].penaltytoken=0;
+          registered[pubToMac[msg.sender]].faulty=0;
+          registered[pubToMac[msg.sender]].timestamp=0;
+
+        }
+        else if( (now-registered[pubToMac[msg.sender]].timestamp)>registered[pubToMac[msg.sender]].faulty)
+        {
+            registered[pubToMac[msg.sender]].penaltytoken+=2 ether;
+            registered[pubToMac[msg.sender]].faulty+=10;
+            registered[pubToMac[msg.sender]].timestamp=now;
+
+        }
+        return;
+    }
+  }
+  function checkBlacklisted() public view returns(uint)
+  {
+    return blacklisted[msg.sender];
+  }
 }

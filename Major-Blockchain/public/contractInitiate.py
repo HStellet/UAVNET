@@ -3,6 +3,8 @@ import time
 from web3 import Web3
 import threading
 from test1 import *
+from dict import *
+
 infura_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 print(web3.isConnected())
@@ -12,8 +14,9 @@ data=json.load(f)
 
 contract = web3.eth.contract(address=data["networks"]["5777"]["address"], abi=data["abi"])
 
-value = contract.functions.transaction().call()
-print(value)
+check = contract.functions.transaction().call()
+print(check)
+# print(contract.functions.getData().call({'from':dictAdd["4"]["address"]}))
 t1 = threading.Thread(target=nodeProcess,args=(1,contract,web3), name='t1')
 t2 = threading.Thread(target=nodeProcess,args=(2,contract,web3), name='t2')
 t3 = threading.Thread(target=nodeProcess,args=(3,contract,web3), name='t3')
@@ -24,8 +27,11 @@ t7 = threading.Thread(target=nodeProcess,args=(7,contract,web3), name='t7')
 t8 = threading.Thread(target=nodeProcess,args=(8,contract,web3), name='t8')
 t9 = threading.Thread(target=inputFn,args=(), name='t9')
 
+
 t1.start()
 t2.start()
 t3.start()
 t4.start()
+t5.start()
+t6.start()
 t9.start()

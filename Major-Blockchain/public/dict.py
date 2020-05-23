@@ -97,12 +97,12 @@ def decrypt(msg,priKey):
     b=priKey.encode()
     c=RSA.importKey(b)
     decryptor = PKCS1_OAEP.new(c)
-    decrypted = decryptor.decrypt(msg)
-    return decrypted
+    decrypted = decryptor.decrypt(msg.encode("latin-1"))
+    return decrypted.decode()
 
 def encrypt(msg,pubKey):
     y=pubKey.encode()
     z=RSA.importKey(y)
     encryptor = PKCS1_OAEP.new(z)
     encrypted = encryptor.encrypt(bytes(msg,'utf-8'))
-    return encrypted
+    return encrypted.decode("latin-1")
