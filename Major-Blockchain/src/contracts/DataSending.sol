@@ -71,7 +71,7 @@ contract DataSending is Registration{
         if(i!=j && registered[list[j]].participating==1)
         {
             int distance=(registered[list[i]].x-registered[list[j]].x)*(registered[list[i]].x-registered[list[j]].x) + (registered[list[i]].y-registered[list[j]].y)*(registered[list[i]].y-registered[list[j]].y) + (registered[list[i]].z-registered[list[j]].z)*(registered[list[i]].z-registered[list[j]].z);
-            if(distance<=4)
+            if(distance<=9)
             {
               routeTable[registered[list[i]].publicKey].push(registered[list[j]].publicKey);
             }

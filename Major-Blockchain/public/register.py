@@ -13,7 +13,6 @@ f=open("../src/abis/PathFind.json")
 data=json.load(f)
 contract = web3.eth.contract(address=data["networks"]["5777"]["address"], abi=data["abi"])
 
-password=dictAdd[str(4)]["password"]
 
 #
 # transaction = contract.functions.registerCoordinates([2,0,0]).buildTransaction({
@@ -27,9 +26,9 @@ password=dictAdd[str(4)]["password"]
 # signed_txn = web3.eth.account.signTransaction(transaction, private_key=private_key)
 # web3.eth.sendRawTransaction(signed_txn.rawTransaction)
 #
-# for i in range(1,9):
-address=dictAdd[str(5)]["address"]
-print(contract.functions.getRegistered().call({'from':address}))
+for i in range(1,10):
+    address=dictAdd[str(i)]["address"]
+    print(contract.functions.getRegistered().call({'from':address}))
 # # #
 
 # if contract.functions.getRegistered().call({'from':address})[0][0]=="0x0000000000000000000000000000000000000000":

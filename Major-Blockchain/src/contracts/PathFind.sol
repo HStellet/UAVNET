@@ -5,9 +5,6 @@ import "./UAV.sol";
 
 contract PathFind is DataSending{
 
-    // event x(
-    //     uint y, uint z);
-    event x3(bool z);
   function bfs(uint[] memory pred) public returns(bool)
   {
       Queue q=new Queue();
@@ -30,7 +27,6 @@ contract PathFind is DataSending{
                   visited[pubToMac[routeTable[registered[u].publicKey][i]]] = true;
                   pred[pubToMac[routeTable[registered[u].publicKey][i]]] = u;
                   q.enqueue(pubToMac[routeTable[registered[u].publicKey][i]]);
-                //   emit x(u,pubToMac[routeTable[registered[u].publicKey][i]]);
 
                   if (pubToMac[routeTable[registered[u].publicKey][i]] == pubToMac[destination])
                       return true;
@@ -52,17 +48,14 @@ contract PathFind is DataSending{
           source=0x0000000000000000000000000000000000000000;
           destination=0x0000000000000000000000000000000000000000;
           transaction=false;
-          emit x3(false);
           return;
       }
-        // emit x1(Route);
       uint crawl = pubToMac[destination];
-      Route.push(route(crawl,"",0));
+      Route.push(route(crawl,destination,"",0));
       while (pred[crawl] != 0) {
-          Route.push(route(pred[crawl],"",0));
+          Route.push(route(pred[crawl],registered[pred[crawl]].publicKey,"",0));
           crawl = pred[crawl];
       }
-    //   emit x1(Route);
       uint start=0;
       uint end=Route.length-1;
       while (start < end)
@@ -73,8 +66,8 @@ contract PathFind is DataSending{
           start++;
           end--;
       }
-      emit x3(true);
   }
   function returnRoute() public view returns(route[] memory)
     {return Route;}
 }
+ 
