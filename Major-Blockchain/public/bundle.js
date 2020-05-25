@@ -45951,7 +45951,8 @@ XMLHttpRequest.prototype.nodejsBaseUrl = null;
 },{"./errors":441,"./progress-event":443,"./xml-http-request-event-target":444,"./xml-http-request-upload":445,"_process":466,"buffer":454,"cookiejar":45,"http":488,"https":458,"os":464,"url":509}],447:[function(require,module,exports){
 var Web3 = require('web3');
 var web3=new Web3("http://127.0.0.1:7545")
-console.log(web3.eth.accounts);
+var arr=web3.eth.getAccounts();
+console.log(arr);
 
 },{"web3":437}],448:[function(require,module,exports){
 (function (global){
