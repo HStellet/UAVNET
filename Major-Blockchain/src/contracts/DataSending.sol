@@ -189,7 +189,7 @@ contract DataSending is Registration{
         pubToMac[registered[list[i]].publicKey]=0;
 
         routeTable[registered[list[i]].publicKey].length=0;
-        if(blacklisted[registered[list[i]].publicKey]<10)
+        if(blacklisted[registered[list[i]].publicKey]<=10)
         {
           list1[count1]=list[i];
           count1++;

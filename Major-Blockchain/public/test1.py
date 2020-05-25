@@ -5,11 +5,44 @@ import numpy as np
 
 routeCount=0
 
+
+
+def updateInfo(contract):
+    while 1:
+        for address,iot in dic.items():
+
+            index=contract.functions.getRegistered().call({'from':address})
+            # print(index)
+            dic[address][6]=index[2]
+
+            if index[2]!=0 and index[0][9]==0 and index[0][2]==0:
+                dic[address][3]=0
+                dic[address][4]=0
+                dic[address][5]=1
+
+
+            elif index[2]!=0 and index[0][9]==1 and index[0][2]==0:
+                dic[address][3]=0
+                dic[address][4]=1
+                dic[address][5]=1
+
+            elif index[2]==0:
+                dic[address][5]=0
+
+
+            elif index[2]!=0 and index[0][9]==1 and index[0][2]!=0:
+                dic[address][3]=1
+                dic[address][4]=1
+                dic[address][5]=1
+            elif index[2]!=0 and index[0][9]==0 and index[0][2]!=0:
+                dic[address][3]=1
+                dic[address][4]=0
+                dic[address][5]=1
 def lineUpdate(obj,address):
     global routeCount
-    obj.line1.set_xdata([obj.data[address][0],obj.data[Route[routeCount][1]][0]])
-    obj.line1.set_ydata([obj.data[address][1],obj.data[Route[routeCount][1]][1]])
-    obj.line1.set_3d_properties([obj.data[address][2],obj.data[Route[routeCount][1]][2]])
+    obj.line1.set_xdata([coordinates[address][0],coordinates[Route[routeCount][1]][0]])
+    obj.line1.set_ydata([coordinates[address][1],coordinates[Route[routeCount][1]][1]])
+    obj.line1.set_3d_properties([coordinates[address][2],coordinates[Route[routeCount][1]][2]])
 
 def disseminate(data,obj,address,password):
     obj.line1, =obj.ax.plot([],[],[],color = 'green',ls='--')
@@ -45,14 +78,6 @@ timestamp=0
 successful=False
 Route=[]
 
-def inputFn():
-    global uavNo
-    global commandOption
-    while 1:
-        if value==True:
-            uavNo,commandOption=input("UAV and commandOption").split(" ")
-            uavNo=int(uavNo)
-            commandOption=int(commandOption)
 
 def nodeProcess(port,obj):
     global routeCount
@@ -73,6 +98,7 @@ def nodeProcess(port,obj):
     address=dictAdd[str(port)]["address"]
     password=dictAdd[str(port)]["password"]
     while 1:
+
         value=obj.contract.functions.transaction().call({'from':address})
         x=int(time.time()-timestamp)
         # count+=1
@@ -111,9 +137,11 @@ def nodeProcess(port,obj):
             source=dictAdd[source]["address"]
             destination=dictAdd[destination]["address"]
 
+
         if value==False:
             submitted=0;
         if value==False and source==address:
+            print(source,destination)
             print("doTrans")
 
             transaction = obj.contract.functions.doTrans(destination).buildTransaction({
@@ -137,14 +165,16 @@ def nodeProcess(port,obj):
             print(address,destination)
             print("intermediate",str(port))
             called=1
-            # routeCount+=1
-            # sendFunction(data,obj,address,password)
+            if port!=7:
+                routeCount+=1
+                sendFunction(data,obj,address,password)
 
+            else:
             # drop()
-            obj.line1, =obj.ax.plot([dic[address][0],dic[address][0]],[dic[address][1],dic[address][1]],[dic[address][2],dic[address][2]-3],color = '#000000',ls='--',marker='o')
-            time.sleep(2)
-            obj.line1.remove()
-        elif data!="" and address==destination and x==30 and value==True:
+                obj.line1, =obj.ax.plot([coordinates[address][0],coordinates[address][0]],[coordinates[address][1],coordinates[address][1]],[coordinates[address][2],coordinates[address][2]-3],color = '#000000',ls='--',marker='o')
+                time.sleep(1)
+                obj.line1.remove()
+        elif data!="" and address==destination and x==27 and value==True:
             print(x,data)
 
             if data==cloudServerData:
@@ -198,10 +228,10 @@ def nodeProcess(port,obj):
                 destination=""
                 routeCount=0
                 value=False
-
                 print("blacklisted")
 
-        elif data=="" and address==destination and x==30 and value==True:
+
+        elif data=="" and address==destination and x==27 and value==True:
             print(x,data)
 
             transaction = obj.contract.functions.unsuccessful(0).buildTransaction({
@@ -227,7 +257,9 @@ def nodeProcess(port,obj):
             value=False
 
             print("blacklisted")
-        if value==True and address==source and x==6:
+
+
+        if value==True and address==source and x==5:
             print(x)
             transaction = obj.contract.functions.updateGraph().buildTransaction({
                 'from': address,
