@@ -1,36 +1,32 @@
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
-import binascii
+from django.shortcuts import render
+from web3 import Web3
+import json
+
+def index(request):
+    values=getDict()
+    context={
+        'dict':values[0],
+        'address':values[1]
+    }
+    # print(values[0][0])
+    return render(request, 'myapp/display.html',context)
+
+def getDict():
+    infura_url = "http://127.0.0.1:7545"
+    web3 = Web3(Web3.HTTPProvider(infura_url))
+    f=open("../Major-Blockchain/src/abis/PathFind.json")
+    data=json.load(f)
+    contract = web3.eth.contract(address=data["networks"]["5777"]["address"], abi=data["abi"])
+    f.close()
+    list=[]
+    for key,value in dictAdd.items():
+        index=contract.functions.getRegistered().call({'from':value["address"]})
+        if(index[2]!=0):
+            x=web3.fromWei(web3.eth.getBalance(value["address"]),'ether')
+            list.append([value["address"],index[2],index[1],index[0][2],index[0][3],str(round(x,3))])
+    return list,data["networks"]["5777"]["address"]
 
 
-# x,y,z,faulty,bcs,exists
-
-coordinates={
-    "0xDf7453D98eF6CA3fede69984bDf6867919DCb5f2":[1,9,0,0,1,1,1],
-    "0xC013957eB72Db45DC18e0eab7C8eA2b52A087b17":[5,5,0,0,1,1,2],
-    "0x3CED2BE858702C64A1f8CbeB5ea2189Ee225A607":[9,1,0,0,1,1,3],
-    "0xF1807eA871559e0f32d9Fe84ba5154eb621Cd449":[4,6,2,0,0,1,4],
-    "0x61c43FcDE17fA702554745D8726dB5CA05Bf2DCC":[4,3,6,0,0,1,5],
-    "0xe4AD0c0D23D5527cB56F71aF078350eFC3123eCB":[6,4,4,0,0,1,6],
-    "0x3bDD340692101D738B5992F72aC580585Bb2f0c8":[8,7,4,0,0,1,7],
-    "0x9dDf27cB6F403BA5989331723F025f8Fb1BAea11":[6,10,5,0,0,1,8],
-    "0x1A4E08947E52882264A5e222382D41024Dae0ddF":[8,2,9,0,0,1,9],
-    "0x8d6a72Ac0880107Fe9B8b608B76ce89405331C33":[5,4,9,0,0,0,0],
-
-}
-
-dic={
-    "0xDf7453D98eF6CA3fede69984bDf6867919DCb5f2":[0,0,0,0,1,1,1],
-    "0xC013957eB72Db45DC18e0eab7C8eA2b52A087b17":[4,0,0,0,1,1,2],
-    "0x3CED2BE858702C64A1f8CbeB5ea2189Ee225A607":[8,0,0,0,1,1,3],
-    "0xF1807eA871559e0f32d9Fe84ba5154eb621Cd449":[0,3,0,0,0,1,4],
-    "0x61c43FcDE17fA702554745D8726dB5CA05Bf2DCC":[0,6,0,0,0,1,5],
-    "0xe4AD0c0D23D5527cB56F71aF078350eFC3123eCB":[3,6,0,0,0,1,6],
-    "0x3bDD340692101D738B5992F72aC580585Bb2f0c8":[3,3,0,0,0,1,7],
-    "0x9dDf27cB6F403BA5989331723F025f8Fb1BAea11":[6,3,0,0,0,1,8],
-    "0x1A4E08947E52882264A5e222382D41024Dae0ddF":[8,3,0,0,0,1,9],
-    "0x8d6a72Ac0880107Fe9B8b608B76ce89405331C33":[0,0,0,0,0,0,0],
-}
 
 dictAdd = {
   "1" : {
@@ -124,16 +120,3 @@ dictAdd = {
     "prikey" : "-----BEGIN RSA PRIVATE KEY-----\nMIICXQIBAAKBgQCcowi3RhjE9wytwOjpQ/vaO4ibAjlTu3VIhf/iK37hi4u/qpMj\n8H2/SXTp6GILyWrMxxYWhIDrbrJLrCNGbZMBJNguNWevExev9EuTNvX2S84ri05L\nQUEeHhSdMwss3YpjOvOWK/XNs6PQ1p9QjlpvmupnesSUkJjhA17voL3WCQIDAQAB\nAoGAEbLGMFcmQ1MaxqMubfT1hxIE/GbC7XgX52rkn7yEaJ2o2649U+k/fBajtC5C\nrcxDWgIAt+ie3Hs0gCJiFfoZivEtr2xaGs/25KF7qVn6dMwC3OJnwetrfyIpf1x6\nypY/melMpW+vMYCPjuLxk9jJwvVawYJNgf+2k7kOyQo46wUCQQC6dR9VMtVVAj32\nNPCyhPaAu5SSCvXiEE2ryIxHZYgu1Za+gvohFveizyn4g+EVbJ3q0ysvZnlxa22H\n3dua05uvAkEA1w6mH6k2LwDsiNjlda+maRMuWhMqHfmVuMQdKNU2BL9fPpKaKggt\nTCcfkrD2mURBhZP5J7CDamJ34rdi4Tx/xwJBAKZfx9uQBkdaPsuoJXZFqmbn+gPu\nf8R947B6vKEgecnAkEfiOyq3gbPmwn6bvoYNa0OTtZ8QAyEvSIbJciDO3MUCQQCl\nGNHfrH+0RflQdXJyjo4qTFdhPyUuLdULK0NXfZcivefYmaNQcUaVF9PdQY2OzB+g\n9KBqH9BDc6SloDOAxnkxAkAzr+prFiHNiFA7JopsFjF8SO9oBKySGhkmZfepGaeo\nYWJS1rsRmA8J00Asp4f0PSKMjv+R5lkvmxr/PnQmnIWz\n-----END RSA PRIVATE KEY-----"
   }
 }
-def decrypt(msg,priKey):
-    b=priKey.encode()
-    c=RSA.importKey(b)
-    decryptor = PKCS1_OAEP.new(c)
-    decrypted = decryptor.decrypt(msg)
-    return decrypted
-
-def encrypt(msg,pubKey):
-    y=pubKey.encode()
-    z=RSA.importKey(y)
-    encryptor = PKCS1_OAEP.new(z)
-    encrypted = encryptor.encrypt(bytes(msg,'utf-8'))
-    return encrypted
