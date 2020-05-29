@@ -8,14 +8,13 @@ import time
 from web3 import Web3
 from test1 import *
 import numpy as np
-object=None
-count=0
+
 def animatewa(self):
 
-    self.anim = animation.FuncAnimation(self.fig,self.update,init_func=None,frames=400000000,interval=5)
+    self.anim = animation.FuncAnimation(self.fig,self.update,init_func=None,frames=400000000,interval=4)
     plt.show()
-# contract=None
-def initialise(self):
+
+def initiateBlockchain(self):
     infura_url = "http://127.0.0.1:7545"
     self.web3 = Web3(Web3.HTTPProvider(infura_url))
     print(self.web3.isConnected())
@@ -25,9 +24,16 @@ def initialise(self):
     data=json.load(f)
     self.contract = self.web3.eth.contract(address=data["networks"]["5777"]["address"], abi=data["abi"])
     f.close()
-
     check = self.contract.functions.transaction().call()
     print(check)
+
+def initialise(self):
+    try:
+        initiateBlockchain(self)
+        print("Blockchain connected")
+    except:
+        print("Blockchain couldn't connect")
+
     self.fig = plt.figure()
     self.ax = self.fig.add_subplot(111, projection='3d')
     # Setting the axes properties
@@ -41,14 +47,13 @@ def initialise(self):
     # f.close()
     return self
 
+def showPlot(plt):
+    plt.show()
+
 class Simulator:
     def __init__(self):
 
-
-        global object
         self=initialise(self)
-        object=self
-
 
         t1 = threading.Thread(target=nodeProcess,args=(1,self), name='t1')
         t2 = threading.Thread(target=nodeProcess,args=(2,self), name='t2')
@@ -59,12 +64,12 @@ class Simulator:
         t7 = threading.Thread(target=nodeProcess,args=(7,self), name='t7')
         t8 = threading.Thread(target=nodeProcess,args=(8,self), name='t8')
         t9 = threading.Thread(target=nodeProcess,args=(9,self), name='t9')
+        t11 = threading.Thread(target=animatewa,args=(self,), name='t11')
+        t11.start()
 
         t10 = threading.Thread(target=updateInfo,args=(self,self.contract), name='t10')
         t10.start()
-
-
-
+        #
         t1.start()
         t2.start()
         t3.start()
@@ -74,7 +79,10 @@ class Simulator:
         t7.start()
         t8.start()
         t9.start()
-        animatewa(self)
+
+        # self.anim = animation.FuncAnimation(self.fig,self.update,init_func=None,frames=400000000,interval=6)
+        # animatewa(self)
+        # plt.show()
 
 
 
@@ -114,7 +122,7 @@ class Simulator:
         y=coordinates[key][1]-5
 
         r=math.sqrt(x**2 + y**2 )
-        phi=1
+        phi=0.8
         if count%2==0:
             if(x>0):
                 phi+=math.degrees(math.atan(y/x))
@@ -130,7 +138,7 @@ class Simulator:
             coordinates[key][1]=r*math.sin(math.radians(phi))+5
 
         else:
-            phi=-1
+            phi=-0.8
             if(x>0):
                 phi+=math.degrees(math.atan(y/x))
             elif(x<0 and y>0):
@@ -148,5 +156,6 @@ class Simulator:
         self.ax.set_xlim3d([min(self.ax.get_xlim3d()[0],coordinates[key][0]),max(self.ax.get_xlim3d()[1],coordinates[key][0])])
         self.ax.set_ylim3d([min(self.ax.get_ylim3d()[0],coordinates[key][1]),max(self.ax.get_ylim3d()[1],coordinates[key][1])])
         self.ax.set_zlim3d([min(self.ax.get_zlim3d()[0],coordinates[key][2]),max(self.ax.get_zlim3d()[1],coordinates[key][2])])
+
 
 Simulator()

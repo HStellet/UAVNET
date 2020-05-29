@@ -4,12 +4,10 @@ from web3 import Web3
 import numpy as np
 
 routeCount=0
-addressLine=""
 
 
 def lineUpdate(obj):
     global routeCount
-
     if routeCount>0:
         try:
             obj.line1.set_xdata([coordinates[Route[routeCount-1][1]][0],coordinates[Route[routeCount][1]][0]])
@@ -19,8 +17,9 @@ def lineUpdate(obj):
             pass
 
 def updateInfo(obj,contract):
+    global value
     while 1:
-        # lineUpdate(obj)
+        inputFn()
         for address,iot in dic.items():
 
             index=contract.functions.getRegistered().call({'from':address})
@@ -51,7 +50,6 @@ def updateInfo(obj,contract):
                 dic[address][4]=0
                 dic[address][5]=1
 
-
 def disseminate(data,obj,address,password):
     obj.line1, =obj.ax.plot([],[],[],color = 'green',ls='--',marker='>')
     # lineUpdate(obj,address)
@@ -67,10 +65,7 @@ def disseminate(data,obj,address,password):
 
 def sendFunction(data,obj,address,password):
     obj.line1, =obj.ax.plot([],[],[],color = 'blue',ls='--',marker='>')
-    # tz = threading.Thread(target=lineUpdate,args=(obj,), name='tz')
-    # tz.start()
 
-    # lineUpdate(obj,address)
     transaction = obj.contract.functions.send(data).buildTransaction({
         'from': address,
         'nonce':obj.web3.eth.getTransactionCount(address),
@@ -82,36 +77,33 @@ def sendFunction(data,obj,address,password):
 
 source=""
 destination=""
-uavNo=0
-commandOption=0
 value=False
 timestamp=0
 successful=False
 Route=[]
 inputVar=0
 
+
 def nodeProcess(port,obj):
     global routeCount
     global inputVar
     global source
     global destination
-    global uavNo
-    global commandOption
     global value
     global timestamp
     global successful
     global Route
     submitted=0
     data=""
-    called=0
+    # called=0
     # count=0
     cloudServerData="hello"
     address=dictAdd[str(port)]["address"]
     password=dictAdd[str(port)]["password"]
     while 1:
 
-        value=obj.contract.functions.transaction().call({'from':address})
         x=int(time.time()-timestamp)
+        value=obj.contract.functions.transaction().call({'from':address})
         if value==True and submitted==0 and port!=1 and port!=2 and port!=3:
             print("registered coordinates")
             print([dic[address][0],dic[address][1],dic[address][2]])
@@ -130,13 +122,6 @@ def nodeProcess(port,obj):
                 print(port, "can't register")
             submitted=1
 
-        if value==False and port==1 and inputVar==0:
-            source,destination=input("Enter Source and destination").split(" ")
-            source=dictAdd[source]["address"]
-            destination=dictAdd[destination]["address"]
-            inputVar=1
-
-
         if value==False:
             submitted=0;
         if value==False and source==address:
@@ -154,19 +139,20 @@ def nodeProcess(port,obj):
             timestamp=time.time()
             print(timestamp)
             value=True
-
-        try:
-            data=obj.contract.functions.getData().call({'from':address})
-        except:
-            pass
-        if data!="" and (address!=destination and address!=source) and called==0 and value==True and len(Route)!=0 and Route[routeCount][0]==port:
+        if len(Route)!=0 and routeCount>0 and Route[routeCount][0]==port:
+            try:
+                data=obj.contract.functions.getData().call({'from':address})
+                print("fetched",data,called,value,address,port)
+            except:
+                pass
+        if data!="" and (address!=destination and address!=source)  and value==True and len(Route)!=0 and routeCount<=len(Route)-1 and Route[routeCount][0]==port:
             try:
                 obj.line1.remove()
             except:
                 pass
             print(address,destination)
             print("intermediate",str(port))
-            called=1
+            # called=1
             # if port==7:
             routeCount+=1
             sendFunction(data,obj,address,password)
@@ -179,9 +165,9 @@ def nodeProcess(port,obj):
             #     obj.line2, =obj.ax.plot([coordinates[address][0],coordinates[address][0]],[coordinates[address][1],coordinates[address][1]],[coordinates[address][2],coordinates[address][2]-3],color = '#000000',ls='--',marker='o')
             #     time.sleep(1)
             #     obj.line2.remove()
-        elif data!="" and address==destination and x==30 and value==True:
+        elif data!="" and address==destination and x==27 and value==True:
             print(x,data)
-            called=0
+
             if data==cloudServerData:
                 try:
                     obj.line1.remove()
@@ -241,16 +227,17 @@ def nodeProcess(port,obj):
                 routeCount=0
                 value=False
                 print("blacklisted")
+                # called=0
+                Route=[]
+                data=""
                 inputVar=0
-
-
-        elif data=="" and address==destination and x==30 and value==True:
+        elif data=="" and address==destination and x==27 and value==True:
             try:
                 obj.line1.remove()
             except:
                 pass
             print(x,data)
-            called=0
+
             transaction = obj.contract.functions.unsuccessful(0).buildTransaction({
                 'from': address,
                 'nonce':obj.web3.eth.getTransactionCount(address),
@@ -274,10 +261,13 @@ def nodeProcess(port,obj):
             value=False
 
             print("blacklisted")
+            data=""
+            # called=0
+            Route=[]
             inputVar=0
 
 
-        if value==True and address==source and x==5:
+        if value==True and address==source and x==4:
             print(x)
             transaction = obj.contract.functions.updateGraph().buildTransaction({
                 'from': address,
@@ -324,19 +314,19 @@ def nodeProcess(port,obj):
             successful=False
             value=False
             routeCount=0
+            # called=0
+            Route=[]
+            data=""
             inputVar=0
-        if uavNo==port and commandOption==4:
-            print(uavNo,commandOption)
-            transaction = obj.contract.functions.abort().buildTransaction({
-                'from': address,
-                'nonce':obj.web3.eth.getTransactionCount(address),
-                })
-            private_key = password
 
-            signed_txn = obj.web3.eth.account.signTransaction(transaction, private_key=private_key)
-            obj.web3.eth.sendRawTransaction(signed_txn.rawTransaction)
 
-            destination=""
-            source=""
-            uavNo=0
-            commandOption=0
+def inputFn():
+    global inputVar
+    global value
+    global source
+    global destination
+    if value==False and inputVar==0:
+        source,destination=input("Enter Source and destination").split(" ")
+        source=dictAdd[source]["address"]
+        destination=dictAdd[destination]["address"]
+        inputVar=1

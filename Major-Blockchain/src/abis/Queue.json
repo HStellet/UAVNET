@@ -50,11 +50,11 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b506001808190555060006002819055506101b28061002f6000396000f3fe608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680631ffc735d1461005c578063681fe70c14610097578063957908d1146100c6575b600080fd5b34801561006857600080fd5b506100956004803603602081101561007f57600080fd5b81019080803590602001909291905050506100f1565b005b3480156100a357600080fd5b506100ac61011e565b604051808215151515815260200191505060405180910390f35b3480156100d257600080fd5b506100db61013d565b6040518082815260200191505060405180910390f35b60016002600082825401925050819055508060008060025481526020019081526020016000208190555050565b60006002546001541115610135576001905061013a565b600090505b90565b600080600080600154815260200190815260200160002054905060008060015481526020019081526020016000206000905560018060008282540192505081905550809150509056fea165627a7a72305820ec1cd92a30c3059d4b7cdd3048e8f3369aae6a31de40f2917699de99696c8f960029",
-  "deployedBytecode": "0x608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680631ffc735d1461005c578063681fe70c14610097578063957908d1146100c6575b600080fd5b34801561006857600080fd5b506100956004803603602081101561007f57600080fd5b81019080803590602001909291905050506100f1565b005b3480156100a357600080fd5b506100ac61011e565b604051808215151515815260200191505060405180910390f35b3480156100d257600080fd5b506100db61013d565b6040518082815260200191505060405180910390f35b60016002600082825401925050819055508060008060025481526020019081526020016000208190555050565b60006002546001541115610135576001905061013a565b600090505b90565b600080600080600154815260200190815260200160002054905060008060015481526020019081526020016000206000905560018060008282540192505081905550809150509056fea165627a7a72305820ec1cd92a30c3059d4b7cdd3048e8f3369aae6a31de40f2917699de99696c8f960029",
+  "bytecode": "0x608060405234801561001057600080fd5b506001808190555060006002819055506101b28061002f6000396000f3fe608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680631ffc735d1461005c578063681fe70c14610097578063957908d1146100c6575b600080fd5b34801561006857600080fd5b506100956004803603602081101561007f57600080fd5b81019080803590602001909291905050506100f1565b005b3480156100a357600080fd5b506100ac61011e565b604051808215151515815260200191505060405180910390f35b3480156100d257600080fd5b506100db61013d565b6040518082815260200191505060405180910390f35b60016002600082825401925050819055508060008060025481526020019081526020016000208190555050565b60006002546001541115610135576001905061013a565b600090505b90565b600080600080600154815260200190815260200160002054905060008060015481526020019081526020016000206000905560018060008282540192505081905550809150509056fea165627a7a723058200595e14500f9f368ec766f2bbfdae1d7081e3deb4a6eb9e3c71e9b1b5c1679d00029",
+  "deployedBytecode": "0x608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680631ffc735d1461005c578063681fe70c14610097578063957908d1146100c6575b600080fd5b34801561006857600080fd5b506100956004803603602081101561007f57600080fd5b81019080803590602001909291905050506100f1565b005b3480156100a357600080fd5b506100ac61011e565b604051808215151515815260200191505060405180910390f35b3480156100d257600080fd5b506100db61013d565b6040518082815260200191505060405180910390f35b60016002600082825401925050819055508060008060025481526020019081526020016000208190555050565b60006002546001541115610135576001905061013a565b600090505b90565b600080600080600154815260200190815260200160002054905060008060015481526020019081526020016000206000905560018060008282540192505081905550809150509056fea165627a7a723058200595e14500f9f368ec766f2bbfdae1d7081e3deb4a6eb9e3c71e9b1b5c1679d00029",
   "sourceMap": "34:472:3:-;;;110:54;8:9:-1;5:2;;;30:1;27;20:12;5:2;110:54:3;144:1;136:5;:9;;;;158:1;151:4;:8;;;;34:472;;;;;;",
   "deployedSourceMap": "34:472:3:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;167:83;;8:9:-1;5:2;;;30:1;27;20:12;5:2;167:83:3;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;167:83:3;;;;;;;;;;;;;;;;;;;;383:121;;8:9:-1;5:2;;;30:1;27;20:12;5:2;383:121:3;;;;;;;;;;;;;;;;;;;;;;;;;;;254:126;;8:9:-1;5:2;;;30:1;27;20:12;5:2;254:126:3;;;;;;;;;;;;;;;;;;;;;;;167:83;218:1;210:4;;:9;;;;;;;;;;;241:4;227:5;:11;233:4;;227:11;;;;;;;;;;;:18;;;;167:83;:::o;383:121::-;423:4;443;;437:5;;:10;434:65;;;464:4;457:11;;;;434:65;494:5;487:12;;383:121;;:::o;254:126::-;289:4;301:6;308:5;:12;314:5;;308:12;;;;;;;;;;;;301:19;;333:5;:12;339:5;;333:12;;;;;;;;;;;326:19;;;360:1;351:5;;:10;;;;;;;;;;;374:1;367:8;;;254:126;:::o",
-  "source": "pragma solidity >=0.4.21 <0.6.0;\n\ncontract Queue{\n  mapping(uint => uint) queue;\n  uint first;\n  uint last;\n  constructor() public{\n    first = 1;\n    last = 0;\n  }\n  function enqueue(uint data) public {\n      last += 1;\n      queue[last] = data;\n  }\n\n  function dequeue() public returns (uint) {\n    uint x=queue[first];\n    delete queue[first];\n    first += 1;\n    return x;\n  }\n  function isEmpty() public view returns (bool){\n    if(first>last)\n        return true;\n    else\n        return false;\n  }\n}\n\ncontract Registration{\n\n  address payable source;\n  address payable destination;\n  bool public transaction;\n\n  struct IOT{\n    address payable publicKey;\n    string encrypt;\n    uint faulty;\n    uint penaltytoken;\n    int x;\n    int y;\n    int z;\n    uint participating;\n    uint timestamp;\n    uint bcs;\n  }\n\n  struct route {\n    uint id;\n    address payable add;\n    string data;\n    uint timestamp;\n  }\n\n  uint[] list;\n  route[] Route;\n  mapping(address=> uint) blacklisted;\n  mapping (uint => IOT) registered;\n\n  mapping (address=>uint) pubToMac;\n\n  constructor() public{\n\n\n    transaction=false;\n    registered[1]=IOT(0xDf7453D98eF6CA3fede69984bDf6867919DCb5f2,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYnoGR9akTl9fkcQp9KDuzHHGX\\n4X6juW9+lZAL1OyTVpuCDxuxS1pCUM3wERt4zUgFidVm6JRiFOBmtmVMZft+A/c+\\n+pkeDoGg0wUG8Rkcz4fBktF6OQLg7Y3xOLEUxQkEm2fCyWPh2K8R45GOkopNc4GI\\nixT23IwOJs+VAKzxkwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,0,0,0,1,0,1);\n    registered[2]=IOT(0xC013957eB72Db45DC18e0eab7C8eA2b52A087b17,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgdeWGyxiFpHpochyYFMMywSPT\\nAgrX3T1bY4SwWbZsgSWi5AeosXkvRnBGCxHb7UCJctYTEv1Oq8GkBJK6cFx7Sj/O\\ndtF+McsB3QfgOsspcsEbJVYnvTWlfg2pdEWMZC9g2M0z3LudqSdQYKZjggnTbzf8\\newB5bC4XKIUZMYA/wwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,4,0,0,1,0,1);\n    registered[3]=IOT(0x3CED2BE858702C64A1f8CbeB5ea2189Ee225A607,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCQZglkt9OPJRaGg+EzEEAptx45\\nIp04S8FpWQDPmWjyg4LxUoyYbUWI2YWJYekbwoijlbJWEzZM+Zd4buRnHP86280V\\nCNVRNZCURQwP62YgPvSrPfi0rzUVfCPGozuCip3VWWEEwe/jMnfBYaNovyOEXKbV\\nljjpoLdqfZ+MwhSEewIDAQAB\\n-----END PUBLIC KEY-----\",0,0,8,0,0,1,0,1);\n    registered[4]=IOT(0xF1807eA871559e0f32d9Fe84ba5154eb621Cd449,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCe3b0CxPaPZ5yUXFMUZEyB2Pol\\nKGUSgHSeVA0vKBcJmL8S8xvnJF7VkiBdEt8j4tP0GLrw00HE4ALUc0Zd+7vT+Mn1\\nwfctt9MEwLeOgUUqFKtjQxPxIKicr2t90J+xytXC8idUX52WBBSNlXSZqwms1bey\\ncTWQUAgufncmHJkuxwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,0,2,0,0,0,0);\n    registered[5]=IOT(0x61c43FcDE17fA702554745D8726dB5CA05Bf2DCC,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCDpQL/h+9nYI60P2FTcUtA4gZv\\n0rOknWU3ozEt0NyW8YTjKZTClYy8vbdGHSYVbqhxcqcigVQaDFqZhJJeVQ/JK7bM\\nJG7v/AuFEjGu3UKfvIiDdSqA7GQnQHN4aT217A0MtaR9VTos4ytb5n1h+srIR8dr\\nA1Sbq0rTJCONEzN2wwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,0,4,0,0,0,0);\n    registered[6]=IOT(0xe4AD0c0D23D5527cB56F71aF078350eFC3123eCB,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC87aj11vwV/ji58cLigpHvcSTJ\\nteAdajJ3PwnUvHHCTjh5Rjh07sZOb1MV2vcOB6PmxlHqocqIEvmT1PBqIoLN9jpB\\nC/tbTWtDLafNEirdtszeUgP2s8vFzhK3F7YqNGHzz7HiOCV7FYVsDe4jyjV10vEf\\nB5tSXt0pH27LJipuZwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,2,4,0,0,0,0);\n    registered[7]=IOT(0x3bDD340692101D738B5992F72aC580585Bb2f0c8,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMJlsg3FieJsbC9xLGyFC8MdkE\\n9V0Yc33WjuZqU6ca7y7K3AUu+TsMYsKGAhQJvcNu5PxwZwfkudY+wIm//NroSt3s\\nGhrMkaNoFTAW1Uc8Q5Y77K1L/kp9M0be0UXXG5Qb3QZ/dczEDDpnm0iLHusTYz7R\\nnwOiJTtf9eGt5ClZ4wIDAQAB\\n-----END PUBLIC KEY-----\",0,0,4,4,0,0,0,0);\n    registered[8]=IOT(0x9dDf27cB6F403BA5989331723F025f8Fb1BAea11,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD1UmkFyvP4PR6ceMCU9xiTBvA5\\nRHi7Q4W/XdrlRoqXH4tBgwtXPObLcppjtGcgsFt6gu7U82Wk1OZ8iREOyY1uNTKD\\n+aT3fXLtGbW6KDifeM5E69DOP2Vjfx61biCCNrjyMZj5qJvbinNvCo/Q37+0dGuU\\npKZ992fW4FzFTBMKvQIDAQAB\\n-----END PUBLIC KEY-----\",0,0,4,2,0,0,0,0);\n    registered[9]=IOT(0x1A4E08947E52882264A5e222382D41024Dae0ddF,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCttQB2CwXj1O+BNFwEkS3AZgVV\\nIMVCWPnFLSHIf4r89MilkT5bpLoZxtxt/xqktfm2Y4y2osHBg3oL+Zo163jI9/ra\\nWJGOOfrHhiGhkTvVap1zj2Ug84+BMVrjFYskoWLVm2AmX1A+T/QpUuloiSjef0Fb\\nnnAmnARbp0JRHn5atQIDAQAB\\n-----END PUBLIC KEY-----\",0,0,0,0,0,0,0,0);\n\n    blacklisted[0xF1807eA871559e0f32d9Fe84ba5154eb621Cd449]=10;\n\n\n    pubToMac[registered[1].publicKey]=1;\n    pubToMac[registered[2].publicKey]=2;\n    pubToMac[registered[3].publicKey]=3;\n    pubToMac[registered[4].publicKey]=4;\n    pubToMac[registered[5].publicKey]=5;\n    pubToMac[registered[6].publicKey]=6;\n    pubToMac[registered[7].publicKey]=7;\n    pubToMac[registered[8].publicKey]=8;\n    pubToMac[registered[9].publicKey]=9;\n\n\n\n    list.push(1);\n    list.push(2);\n    list.push(3);\n    list.push(4);\n    list.push(5);\n    list.push(6);\n    list.push(7);\n    list.push(8);\n    list.push(9);\n\n\n  }\n  function registration(string memory pubkey) public payable{\n    if(pubToMac[msg.sender]==0 && blacklisted[msg.sender]==0 && msg.value==5 ether)\n    {\n      list.push(list.length+1);\n      pubToMac[msg.sender]=list.length;\n      registered[pubToMac[msg.sender]].publicKey=msg.sender;\n      registered[pubToMac[msg.sender]].encrypt=pubkey;\n      registered[pubToMac[msg.sender]].faulty=0;\n      registered[pubToMac[msg.sender]].penaltytoken=0;\n      registered[pubToMac[msg.sender]].participating=0;\n      registered[pubToMac[msg.sender]].bcs=0;\n      registered[pubToMac[msg.sender]].x=0;\n      registered[pubToMac[msg.sender]].y=0;\n      registered[pubToMac[msg.sender]].z=0;\n\n    }\n    else\n      return;\n  }\n  function removeFromFaulty() public payable{\n    if(pubToMac[msg.sender]!=0 && registered[pubToMac[msg.sender]].faulty!=0)\n    {\n        if(registered[pubToMac[msg.sender]].penaltytoken == msg.value && (now-registered[pubToMac[msg.sender]].timestamp)<=registered[pubToMac[msg.sender]].faulty)\n        {\n          registered[pubToMac[msg.sender]].penaltytoken=0;\n          registered[pubToMac[msg.sender]].faulty=0;\n          registered[pubToMac[msg.sender]].timestamp=0;\n\n        }\n        else if( (now-registered[pubToMac[msg.sender]].timestamp)>registered[pubToMac[msg.sender]].faulty)\n        {\n            registered[pubToMac[msg.sender]].penaltytoken+=2 ether;\n            registered[pubToMac[msg.sender]].faulty+=10;\n            registered[pubToMac[msg.sender]].timestamp=now;\n\n        }\n        return;\n    }\n  }\n  function checkBlacklisted() public view returns(uint)\n  {\n    return blacklisted[msg.sender];\n  }\n}\n",
+  "source": "pragma solidity >=0.4.21 <0.6.0;\n\ncontract Queue{\n  mapping(uint => uint) queue;\n  uint first;\n  uint last;\n  constructor() public{\n    first = 1;\n    last = 0;\n  }\n  function enqueue(uint data) public {\n      last += 1;\n      queue[last] = data;\n  }\n\n  function dequeue() public returns (uint) {\n    uint x=queue[first];\n    delete queue[first];\n    first += 1;\n    return x;\n  }\n  function isEmpty() public view returns (bool){\n    if(first>last)\n        return true;\n    else\n        return false;\n  }\n}\n\ncontract Registration{\n\n  address payable source;\n  address payable destination;\n  bool public transaction;\n\n  struct IOT{\n    address payable publicKey;\n    string encrypt;\n    uint faulty;\n    uint penaltytoken;\n    int x;\n    int y;\n    int z;\n    uint participating;\n    uint timestamp;\n    uint bcs;\n  }\n\n  struct route {\n    uint id;\n    address payable add;\n    string data;\n    uint timestamp;\n  }\n\n  uint[] list;\n  route[] Route;\n  mapping(address=> uint) blacklisted;\n  mapping (uint => IOT) registered;\n\n  mapping (address=>uint) pubToMac;\n\n  constructor() public{\n\n\n    transaction=false;\n    registered[1]=IOT(0x70E3638080c5F2d79d9ecDa07b915bCDA59efF50,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYnoGR9akTl9fkcQp9KDuzHHGX\\n4X6juW9+lZAL1OyTVpuCDxuxS1pCUM3wERt4zUgFidVm6JRiFOBmtmVMZft+A/c+\\n+pkeDoGg0wUG8Rkcz4fBktF6OQLg7Y3xOLEUxQkEm2fCyWPh2K8R45GOkopNc4GI\\nixT23IwOJs+VAKzxkwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,0,0,0,1,0,1);\n    registered[2]=IOT(0x89d4046f422b59bb5CAB387d07d10126c7506F95,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgdeWGyxiFpHpochyYFMMywSPT\\nAgrX3T1bY4SwWbZsgSWi5AeosXkvRnBGCxHb7UCJctYTEv1Oq8GkBJK6cFx7Sj/O\\ndtF+McsB3QfgOsspcsEbJVYnvTWlfg2pdEWMZC9g2M0z3LudqSdQYKZjggnTbzf8\\newB5bC4XKIUZMYA/wwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,4,0,0,1,0,1);\n    registered[3]=IOT(0x921D10D6B1764f4bA35958a580086E1EC8D5Cae4,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCQZglkt9OPJRaGg+EzEEAptx45\\nIp04S8FpWQDPmWjyg4LxUoyYbUWI2YWJYekbwoijlbJWEzZM+Zd4buRnHP86280V\\nCNVRNZCURQwP62YgPvSrPfi0rzUVfCPGozuCip3VWWEEwe/jMnfBYaNovyOEXKbV\\nljjpoLdqfZ+MwhSEewIDAQAB\\n-----END PUBLIC KEY-----\",0,0,8,0,0,1,0,1);\n    registered[4]=IOT(0xC335ef44ac81d4D32c4b9636104865a21D4cDd77,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCe3b0CxPaPZ5yUXFMUZEyB2Pol\\nKGUSgHSeVA0vKBcJmL8S8xvnJF7VkiBdEt8j4tP0GLrw00HE4ALUc0Zd+7vT+Mn1\\nwfctt9MEwLeOgUUqFKtjQxPxIKicr2t90J+xytXC8idUX52WBBSNlXSZqwms1bey\\ncTWQUAgufncmHJkuxwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,0,2,0,0,0,0);\n    registered[5]=IOT(0x6DFBc4D1639e7707eACd3787066Ea8836f9E0B15,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCDpQL/h+9nYI60P2FTcUtA4gZv\\n0rOknWU3ozEt0NyW8YTjKZTClYy8vbdGHSYVbqhxcqcigVQaDFqZhJJeVQ/JK7bM\\nJG7v/AuFEjGu3UKfvIiDdSqA7GQnQHN4aT217A0MtaR9VTos4ytb5n1h+srIR8dr\\nA1Sbq0rTJCONEzN2wwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,0,4,0,0,0,0);\n    registered[6]=IOT(0xB4E174b126Bc49f6b81341B54C08037D76d052E2,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC87aj11vwV/ji58cLigpHvcSTJ\\nteAdajJ3PwnUvHHCTjh5Rjh07sZOb1MV2vcOB6PmxlHqocqIEvmT1PBqIoLN9jpB\\nC/tbTWtDLafNEirdtszeUgP2s8vFzhK3F7YqNGHzz7HiOCV7FYVsDe4jyjV10vEf\\nB5tSXt0pH27LJipuZwIDAQAB\\n-----END PUBLIC KEY-----\",0,0,2,4,0,0,0,0);\n    registered[7]=IOT(0x464Efed2E93050ed8e6F930dd69c651Ec653DD52,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMJlsg3FieJsbC9xLGyFC8MdkE\\n9V0Yc33WjuZqU6ca7y7K3AUu+TsMYsKGAhQJvcNu5PxwZwfkudY+wIm//NroSt3s\\nGhrMkaNoFTAW1Uc8Q5Y77K1L/kp9M0be0UXXG5Qb3QZ/dczEDDpnm0iLHusTYz7R\\nnwOiJTtf9eGt5ClZ4wIDAQAB\\n-----END PUBLIC KEY-----\",0,0,4,4,0,0,0,0);\n    registered[8]=IOT(0x0dc98391981033aa1d94518aAE1c73406572e9eE,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD1UmkFyvP4PR6ceMCU9xiTBvA5\\nRHi7Q4W/XdrlRoqXH4tBgwtXPObLcppjtGcgsFt6gu7U82Wk1OZ8iREOyY1uNTKD\\n+aT3fXLtGbW6KDifeM5E69DOP2Vjfx61biCCNrjyMZj5qJvbinNvCo/Q37+0dGuU\\npKZ992fW4FzFTBMKvQIDAQAB\\n-----END PUBLIC KEY-----\",0,0,4,2,0,0,0,0);\n    registered[9]=IOT(0x728eC075e466b9c39036d580dFcCd06204ACD9C8,\"-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCttQB2CwXj1O+BNFwEkS3AZgVV\\nIMVCWPnFLSHIf4r89MilkT5bpLoZxtxt/xqktfm2Y4y2osHBg3oL+Zo163jI9/ra\\nWJGOOfrHhiGhkTvVap1zj2Ug84+BMVrjFYskoWLVm2AmX1A+T/QpUuloiSjef0Fb\\nnnAmnARbp0JRHn5atQIDAQAB\\n-----END PUBLIC KEY-----\",0,0,0,0,0,0,0,0);\n\n    blacklisted[0xC335ef44ac81d4D32c4b9636104865a21D4cDd77]=10;\n\n\n    pubToMac[registered[1].publicKey]=1;\n    pubToMac[registered[2].publicKey]=2;\n    pubToMac[registered[3].publicKey]=3;\n    pubToMac[registered[4].publicKey]=4;\n    pubToMac[registered[5].publicKey]=5;\n    pubToMac[registered[6].publicKey]=6;\n    pubToMac[registered[7].publicKey]=7;\n    pubToMac[registered[8].publicKey]=8;\n    pubToMac[registered[9].publicKey]=9;\n\n\n\n    list.push(1);\n    list.push(2);\n    list.push(3);\n    list.push(4);\n    list.push(5);\n    list.push(6);\n    list.push(7);\n    list.push(8);\n    list.push(9);\n\n\n  }\n  function registration(string memory pubkey) public payable{\n    if(pubToMac[msg.sender]==0 && blacklisted[msg.sender]==0 && msg.value==5 ether)\n    {\n      list.push(list.length+1);\n      pubToMac[msg.sender]=list.length;\n      registered[pubToMac[msg.sender]].publicKey=msg.sender;\n      registered[pubToMac[msg.sender]].encrypt=pubkey;\n      registered[pubToMac[msg.sender]].faulty=0;\n      registered[pubToMac[msg.sender]].penaltytoken=0;\n      registered[pubToMac[msg.sender]].participating=0;\n      registered[pubToMac[msg.sender]].bcs=0;\n      registered[pubToMac[msg.sender]].x=0;\n      registered[pubToMac[msg.sender]].y=0;\n      registered[pubToMac[msg.sender]].z=0;\n\n    }\n    else\n      return;\n  }\n  function removeFromFaulty() public payable{\n    if(pubToMac[msg.sender]!=0 && registered[pubToMac[msg.sender]].faulty!=0)\n    {\n        if(registered[pubToMac[msg.sender]].penaltytoken == msg.value && (now-registered[pubToMac[msg.sender]].timestamp)<=registered[pubToMac[msg.sender]].faulty)\n        {\n          registered[pubToMac[msg.sender]].penaltytoken=0;\n          registered[pubToMac[msg.sender]].faulty=0;\n          registered[pubToMac[msg.sender]].timestamp=0;\n\n        }\n        else if( (now-registered[pubToMac[msg.sender]].timestamp)>registered[pubToMac[msg.sender]].faulty)\n        {\n            registered[pubToMac[msg.sender]].penaltytoken+=2 ether;\n            registered[pubToMac[msg.sender]].faulty+=10;\n            registered[pubToMac[msg.sender]].timestamp=now;\n\n        }\n        return;\n    }\n  }\n  function checkBlacklisted() public view returns(uint)\n  {\n    return blacklisted[msg.sender];\n  }\n}\n",
   "sourcePath": "/home/stellet/Desktop/Major Project-1/Major-Blockchain/src/contracts/UAV.sol",
   "ast": {
     "absolutePath": "/home/stellet/Desktop/Major Project-1/Major-Blockchain/src/contracts/UAV.sol",
@@ -1750,7 +1750,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307844663734353344393865463643413366656465363939383462446636383637393139444362356632",
+                          "hexValue": "307837304533363338303830633546326437396439656344613037623931356243444135396566463530",
                           "id": 1696,
                           "isConstant": false,
                           "isLValue": false,
@@ -1764,7 +1764,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0xDf7453D98eF6CA3fede69984bDf6867919DCb5f2"
+                          "value": "0x70E3638080c5F2d79d9ecDa07b915bCDA59efF50"
                         },
                         {
                           "argumentTypes": null,
@@ -2067,7 +2067,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307843303133393537654237324462343544433138653065616237433865413262353241303837623137",
+                          "hexValue": "307838396434303436663432326235396262354341423338376430376431303132366337353036463935",
                           "id": 1713,
                           "isConstant": false,
                           "isLValue": false,
@@ -2081,7 +2081,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0xC013957eB72Db45DC18e0eab7C8eA2b52A087b17"
+                          "value": "0x89d4046f422b59bb5CAB387d07d10126c7506F95"
                         },
                         {
                           "argumentTypes": null,
@@ -2384,7 +2384,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307833434544324245383538373032433634413166384362654235656132313839456532323541363037",
+                          "hexValue": "307839323144313044364231373634663462413335393538613538303038364531454338443543616534",
                           "id": 1730,
                           "isConstant": false,
                           "isLValue": false,
@@ -2398,7 +2398,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x3CED2BE858702C64A1f8CbeB5ea2189Ee225A607"
+                          "value": "0x921D10D6B1764f4bA35958a580086E1EC8D5Cae4"
                         },
                         {
                           "argumentTypes": null,
@@ -2701,7 +2701,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307846313830376541383731353539653066333264394665383462613531353465623632314364343439",
+                          "hexValue": "307843333335656634346163383164344433326334623936333631303438363561323144346344643737",
                           "id": 1747,
                           "isConstant": false,
                           "isLValue": false,
@@ -2715,7 +2715,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0xF1807eA871559e0f32d9Fe84ba5154eb621Cd449"
+                          "value": "0xC335ef44ac81d4D32c4b9636104865a21D4cDd77"
                         },
                         {
                           "argumentTypes": null,
@@ -3018,7 +3018,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307836316334334663444531376641373032353534373435443837323664423543413035426632444343",
+                          "hexValue": "307836444642633444313633396537373037654143643337383730363645613838333666394530423135",
                           "id": 1764,
                           "isConstant": false,
                           "isLValue": false,
@@ -3032,7 +3032,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x61c43FcDE17fA702554745D8726dB5CA05Bf2DCC"
+                          "value": "0x6DFBc4D1639e7707eACd3787066Ea8836f9E0B15"
                         },
                         {
                           "argumentTypes": null,
@@ -3335,7 +3335,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307865344144306330443233443535323763423536463731614630373833353065464333313233654342",
+                          "hexValue": "307842344531373462313236426334396636623831333431423534433038303337443736643035324532",
                           "id": 1781,
                           "isConstant": false,
                           "isLValue": false,
@@ -3349,7 +3349,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0xe4AD0c0D23D5527cB56F71aF078350eFC3123eCB"
+                          "value": "0xB4E174b126Bc49f6b81341B54C08037D76d052E2"
                         },
                         {
                           "argumentTypes": null,
@@ -3652,7 +3652,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307833624444333430363932313031443733384235393932463732614335383035383542623266306338",
+                          "hexValue": "307834363445666564324539333035306564386536463933306464363963363531456336353344443532",
                           "id": 1798,
                           "isConstant": false,
                           "isLValue": false,
@@ -3666,7 +3666,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x3bDD340692101D738B5992F72aC580585Bb2f0c8"
+                          "value": "0x464Efed2E93050ed8e6F930dd69c651Ec653DD52"
                         },
                         {
                           "argumentTypes": null,
@@ -3969,7 +3969,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307839644466323763423646343033424135393839333331373233463032356638466231424165613131",
+                          "hexValue": "307830646339383339313938313033336161316439343531386141453163373334303635373265396545",
                           "id": 1815,
                           "isConstant": false,
                           "isLValue": false,
@@ -3983,7 +3983,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x9dDf27cB6F403BA5989331723F025f8Fb1BAea11"
+                          "value": "0x0dc98391981033aa1d94518aAE1c73406572e9eE"
                         },
                         {
                           "argumentTypes": null,
@@ -4286,7 +4286,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307831413445303839343745353238383232363441356532323233383244343130323444616530646446",
+                          "hexValue": "307837323865433037356534363662396333393033366435383064466343643036323034414344394338",
                           "id": 1832,
                           "isConstant": false,
                           "isLValue": false,
@@ -4300,7 +4300,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x1A4E08947E52882264A5e222382D41024Dae0ddF"
+                          "value": "0x728eC075e466b9c39036d580dFcCd06204ACD9C8"
                         },
                         {
                           "argumentTypes": null,
@@ -4569,7 +4569,7 @@
                       "id": 1847,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "hexValue": "307846313830376541383731353539653066333264394665383462613531353465623632314364343439",
+                        "hexValue": "307843333335656634346163383164344433326334623936333631303438363561323144346344643737",
                         "id": 1846,
                         "isConstant": false,
                         "isLValue": false,
@@ -4583,7 +4583,7 @@
                           "typeIdentifier": "t_address_payable",
                           "typeString": "address payable"
                         },
-                        "value": "0xF1807eA871559e0f32d9Fe84ba5154eb621Cd449"
+                        "value": "0xC335ef44ac81d4D32c4b9636104865a21D4cDd77"
                       },
                       "isConstant": false,
                       "isLValue": true,
@@ -11962,7 +11962,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307844663734353344393865463643413366656465363939383462446636383637393139444362356632",
+                          "hexValue": "307837304533363338303830633546326437396439656344613037623931356243444135396566463530",
                           "id": 1696,
                           "isConstant": false,
                           "isLValue": false,
@@ -11976,7 +11976,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0xDf7453D98eF6CA3fede69984bDf6867919DCb5f2"
+                          "value": "0x70E3638080c5F2d79d9ecDa07b915bCDA59efF50"
                         },
                         {
                           "argumentTypes": null,
@@ -12279,7 +12279,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307843303133393537654237324462343544433138653065616237433865413262353241303837623137",
+                          "hexValue": "307838396434303436663432326235396262354341423338376430376431303132366337353036463935",
                           "id": 1713,
                           "isConstant": false,
                           "isLValue": false,
@@ -12293,7 +12293,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0xC013957eB72Db45DC18e0eab7C8eA2b52A087b17"
+                          "value": "0x89d4046f422b59bb5CAB387d07d10126c7506F95"
                         },
                         {
                           "argumentTypes": null,
@@ -12596,7 +12596,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307833434544324245383538373032433634413166384362654235656132313839456532323541363037",
+                          "hexValue": "307839323144313044364231373634663462413335393538613538303038364531454338443543616534",
                           "id": 1730,
                           "isConstant": false,
                           "isLValue": false,
@@ -12610,7 +12610,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x3CED2BE858702C64A1f8CbeB5ea2189Ee225A607"
+                          "value": "0x921D10D6B1764f4bA35958a580086E1EC8D5Cae4"
                         },
                         {
                           "argumentTypes": null,
@@ -12913,7 +12913,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307846313830376541383731353539653066333264394665383462613531353465623632314364343439",
+                          "hexValue": "307843333335656634346163383164344433326334623936333631303438363561323144346344643737",
                           "id": 1747,
                           "isConstant": false,
                           "isLValue": false,
@@ -12927,7 +12927,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0xF1807eA871559e0f32d9Fe84ba5154eb621Cd449"
+                          "value": "0xC335ef44ac81d4D32c4b9636104865a21D4cDd77"
                         },
                         {
                           "argumentTypes": null,
@@ -13230,7 +13230,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307836316334334663444531376641373032353534373435443837323664423543413035426632444343",
+                          "hexValue": "307836444642633444313633396537373037654143643337383730363645613838333666394530423135",
                           "id": 1764,
                           "isConstant": false,
                           "isLValue": false,
@@ -13244,7 +13244,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x61c43FcDE17fA702554745D8726dB5CA05Bf2DCC"
+                          "value": "0x6DFBc4D1639e7707eACd3787066Ea8836f9E0B15"
                         },
                         {
                           "argumentTypes": null,
@@ -13547,7 +13547,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307865344144306330443233443535323763423536463731614630373833353065464333313233654342",
+                          "hexValue": "307842344531373462313236426334396636623831333431423534433038303337443736643035324532",
                           "id": 1781,
                           "isConstant": false,
                           "isLValue": false,
@@ -13561,7 +13561,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0xe4AD0c0D23D5527cB56F71aF078350eFC3123eCB"
+                          "value": "0xB4E174b126Bc49f6b81341B54C08037D76d052E2"
                         },
                         {
                           "argumentTypes": null,
@@ -13864,7 +13864,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307833624444333430363932313031443733384235393932463732614335383035383542623266306338",
+                          "hexValue": "307834363445666564324539333035306564386536463933306464363963363531456336353344443532",
                           "id": 1798,
                           "isConstant": false,
                           "isLValue": false,
@@ -13878,7 +13878,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x3bDD340692101D738B5992F72aC580585Bb2f0c8"
+                          "value": "0x464Efed2E93050ed8e6F930dd69c651Ec653DD52"
                         },
                         {
                           "argumentTypes": null,
@@ -14181,7 +14181,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307839644466323763423646343033424135393839333331373233463032356638466231424165613131",
+                          "hexValue": "307830646339383339313938313033336161316439343531386141453163373334303635373265396545",
                           "id": 1815,
                           "isConstant": false,
                           "isLValue": false,
@@ -14195,7 +14195,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x9dDf27cB6F403BA5989331723F025f8Fb1BAea11"
+                          "value": "0x0dc98391981033aa1d94518aAE1c73406572e9eE"
                         },
                         {
                           "argumentTypes": null,
@@ -14498,7 +14498,7 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "hexValue": "307831413445303839343745353238383232363441356532323233383244343130323444616530646446",
+                          "hexValue": "307837323865433037356534363662396333393033366435383064466343643036323034414344394338",
                           "id": 1832,
                           "isConstant": false,
                           "isLValue": false,
@@ -14512,7 +14512,7 @@
                             "typeIdentifier": "t_address_payable",
                             "typeString": "address payable"
                           },
-                          "value": "0x1A4E08947E52882264A5e222382D41024Dae0ddF"
+                          "value": "0x728eC075e466b9c39036d580dFcCd06204ACD9C8"
                         },
                         {
                           "argumentTypes": null,
@@ -14781,7 +14781,7 @@
                       "id": 1847,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "hexValue": "307846313830376541383731353539653066333264394665383462613531353465623632314364343439",
+                        "hexValue": "307843333335656634346163383164344433326334623936333631303438363561323144346344643737",
                         "id": 1846,
                         "isConstant": false,
                         "isLValue": false,
@@ -14795,7 +14795,7 @@
                           "typeIdentifier": "t_address_payable",
                           "typeString": "address payable"
                         },
-                        "value": "0xF1807eA871559e0f32d9Fe84ba5154eb621Cd449"
+                        "value": "0xC335ef44ac81d4D32c4b9636104865a21D4cDd77"
                       },
                       "isConstant": false,
                       "isLValue": true,
@@ -20486,7 +20486,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2020-05-27T22:12:22.254Z",
+  "updatedAt": "2020-05-28T17:56:43.720Z",
   "devdoc": {
     "methods": {}
   },
