@@ -85,8 +85,6 @@ class Simulator:
         # plt.show()
 
 
-
-
     def pointCreation(self):
         count=0
         for address,iot in dic.items():

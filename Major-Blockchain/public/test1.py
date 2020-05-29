@@ -16,6 +16,7 @@ def lineUpdate(obj):
         except:
             pass
 
+#updates dic
 def updateInfo(obj,contract):
     global value
     while 1:
@@ -104,6 +105,7 @@ def nodeProcess(port,obj):
 
         x=int(time.time()-timestamp)
         value=obj.contract.functions.transaction().call({'from':address})
+# To remove a blacklisted node from plotted graph comment out 109
         if value==True and submitted==0 and port!=1 and port!=2 and port!=3:
             print("registered coordinates")
             print([dic[address][0],dic[address][1],dic[address][2]])
@@ -133,12 +135,13 @@ def nodeProcess(port,obj):
                 'nonce': obj.web3.eth.getTransactionCount(address),
                 })
             private_key = password
-
+# Veery transaction is signed using sender's private key to encrypt transaction details
             signed_txn = obj.web3.eth.account.signTransaction(transaction, private_key=private_key)
             obj.web3.eth.sendRawTransaction(signed_txn.rawTransaction)
             timestamp=time.time()
             print(timestamp)
             value=True
+            #inititally it will be skipped
         if len(Route)!=0 and routeCount>0 and Route[routeCount][0]==port:
             try:
                 data=obj.contract.functions.getData().call({'from':address})
@@ -153,18 +156,20 @@ def nodeProcess(port,obj):
             print(address,destination)
             print("intermediate",str(port))
             # called=1
+            #change sendFunction to disseminate
             # if port==7:
-            routeCount+=1
-            sendFunction(data,obj,address,password)
+            #     routeCount+=1
+            #     disseminate(data,obj,address,password)
             # else:
             #     routeCount+=1
             #     sendFunction(data,obj,address,password)
 
-            # elif port==7:
-            # # # drop()
-            #     obj.line2, =obj.ax.plot([coordinates[address][0],coordinates[address][0]],[coordinates[address][1],coordinates[address][1]],[coordinates[address][2],coordinates[address][2]-3],color = '#000000',ls='--',marker='o')
-            #     time.sleep(1)
-            #     obj.line2.remove()
+
+            if port==4:
+            # # drop()
+                obj.line2, =obj.ax.plot([coordinates[address][0],coordinates[address][0]],[coordinates[address][1],coordinates[address][1]],[coordinates[address][2],coordinates[address][2]-3],color = '#000000',ls='--',marker='o')
+                time.sleep(1)
+                obj.line2.remove()
         elif data!="" and address==destination and x==27 and value==True:
             print(x,data)
 
