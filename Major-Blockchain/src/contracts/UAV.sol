@@ -49,7 +49,7 @@ contract Registration{
   struct route {
     uint id;
     address payable add;
-    string data;
+    bytes data;
     uint timestamp;
   }
 

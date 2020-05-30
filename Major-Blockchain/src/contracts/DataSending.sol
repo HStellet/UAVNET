@@ -128,7 +128,7 @@ contract DataSending is Registration{
       {
         for(uint i=1;i<Route.length;i++)
         {
-          if(keccak256(bytes(Route[i].data))!=keccak256(bytes(Route[0].data)))
+          if(keccak256(Route[i].data)!=keccak256(Route[0].data))
           {
             registered[Route[i-1].id].participating=0;
             blacklisted[registered[Route[i-1].id].publicKey]++;
@@ -166,16 +166,16 @@ contract DataSending is Registration{
 
   }
 
-  function send(string memory x) public{
+  function send(bytes memory x) public{
       require(msg.sender==registered[Route[count].id].publicKey);
       if(count==0)
-        Route[count].data=string(x);
+        Route[count].data=x;
       Route[count].timestamp=now;
       if(count+1<=Route.length-1)
-        Route[count+1].data=string(x);
+        Route[count+1].data=x;
       count++;
   }
-  function getData() public view returns (string memory) {
+  function getData() public view returns (bytes memory) {
     if(msg.sender==registered[Route[count].id].publicKey)
       return Route[count].data;
     else
