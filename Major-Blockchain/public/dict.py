@@ -3,7 +3,7 @@ from Crypto.Cipher import PKCS1_OAEP
 import binascii
 
 
-# x,y,z,faulty,bcs,exists
+# x,y,z,faulty,bcs,exists,index
 
 coordinates={
     "0x70E3638080c5F2d79d9ecDa07b915bCDA59efF50":[1,9,0,0,1,1,1],

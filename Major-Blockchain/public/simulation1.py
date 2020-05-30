@@ -64,6 +64,9 @@ class Simulator:
         t7 = threading.Thread(target=nodeProcess,args=(7,self), name='t7')
         t8 = threading.Thread(target=nodeProcess,args=(8,self), name='t8')
         t9 = threading.Thread(target=nodeProcess,args=(9,self), name='t9')
+        # t12 = threading.Thread(target=inputFn,args=(), name='t12')
+        # t12.start()
+
         t11 = threading.Thread(target=animatewa,args=(self,), name='t11')
         t11.start()
 
@@ -97,7 +100,9 @@ class Simulator:
                 self.axesUpdate(address)
                 if count>=3:
                     self.trajectory(address,count)
+            # (x,y,z,faulty,bcs/uav,exists,index,object)
             count+=1
+
             if len(iot)==7 and iot[4]==1 and iot[5]!=0:
                 iot.append(self.ax.scatter3D([],[],[],marker='$'+str(iot[6])+'$',s=300, c='blue', picker = True))
             elif len(iot)==7 and iot[4]==0 and iot[5]!=0:
@@ -114,6 +119,7 @@ class Simulator:
     def update(self,x):
 
         self.pointCreation()
+
         lineUpdate(self)
 
     def trajectory(self,key,count):
@@ -122,8 +128,9 @@ class Simulator:
         y=coordinates[key][1]-5
 
         r=math.sqrt(x**2 + y**2 )
-        phi=0.8
         if count%2==0:
+            phi=0.8
+
             if(x>0):
                 phi+=math.degrees(math.atan(y/x))
             elif(x<0 and y>0):
