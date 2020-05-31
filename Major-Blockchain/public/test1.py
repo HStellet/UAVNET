@@ -16,13 +16,26 @@ def lineUpdate(obj):
         except:
             pass
 
+        try:
+            obj.line2.set_xdata([coordinates[Route[routeCount][1]][0],coordinates[Route[routeCount][1]][0]])
+            obj.line2.set_ydata([coordinates[Route[routeCount][1]][1],coordinates[Route[routeCount][1]][1]])
+            obj.line2.set_3d_properties([coordinates[Route[routeCount][1]][2],coordinates[Route[routeCount][1]][2]-2])
+        except:
+            pass
+
+
 def updateInfo(obj,contract):
     global value
     while 1:
+        # print(dic)
         for address,iot in dic.items():
 
             index=contract.functions.getRegistered().call({'from':address})
             # print(index)
+            # if dic[address][6]!=index[2] and len(iot)==8:
+            #     # colorset=dic[address][7]._facecolor3d[0]
+            #     # dic[address][7].remove()
+            #     # dic[address].pop()
             dic[address][6]=index[2]
 
             if index[2]!=0 and index[0][9]==0 and index[0][2]==0:
@@ -115,7 +128,7 @@ def nodeProcess(port,obj):
         value=obj.contract.functions.transaction().call({'from':address})
 
         if value==True and submitted==0 and port!=1 and port!=2 and port!=3:
-            print(port,"has registered coordinates\n")
+
             try:
                 transaction = obj.contract.functions.registerCoordinates([dic[address][0],dic[address][1],dic[address][2]]).buildTransaction({
                     'from': address,
@@ -127,6 +140,7 @@ def nodeProcess(port,obj):
 
                 signed_txn = obj.web3.eth.account.signTransaction(transaction, private_key=private_key)
                 obj.web3.eth.sendRawTransaction(signed_txn.rawTransaction)
+                print(port,"has registered coordinates\n")
             except:
                 print(port, "can't register")
             submitted=1
@@ -150,13 +164,13 @@ def nodeProcess(port,obj):
             value=True
             value1=True
 
-        if len(Route)!=0 and routeCount>0 and Route[routeCount][0]==port:
+        if len(Route)!=0 and routeCount>0 and Route[routeCount][1]==address:
             try:
                 data=obj.contract.functions.getData().call({'from':address})
                 # print("fetched",data,called,value,address,port)
             except:
                 pass
-        if called==0 and data!=b'' and (address!=destination and address!=source)  and value==True and len(Route)!=0 and routeCount<=len(Route)-1 and Route[routeCount][0]==port:
+        if called==0 and data!=b'' and (address!=destination and address!=source)  and value==True and len(Route)!=0 and routeCount<=len(Route)-1 and Route[routeCount][1]==address:
             print("DATA RECEIVED AT INTERMEDIATE NODE",str(port),": ",data,"\n")
             try:
                 obj.line1.remove()
@@ -166,11 +180,11 @@ def nodeProcess(port,obj):
             # if port==7:
             #     routeCount+=1
             #     disseminate(data,obj,address,password)
-            # else:
-            #     routeCount+=1
-            #     sendFunction(data,obj,address,password)
-
-            if port==4:
+            if port!=4:
+                routeCount+=1
+                sendFunction(data,obj,address,password)
+            #
+            elif port==4:
             # # drop()
                 obj.line2, =obj.ax.plot([coordinates[address][0],coordinates[address][0]],[coordinates[address][1],coordinates[address][1]],[coordinates[address][2],coordinates[address][2]-3],color = '#000000',ls='--',marker='o')
                 time.sleep(2)

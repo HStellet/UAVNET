@@ -1,29 +1,31 @@
-from web3 import Web3
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import random,math
+import threading
 import json
-from dict import *
-infura_url = "http://127.0.0.1:7545"
-web3 = Web3(Web3.HTTPProvider(infura_url))
+import time
+from web3 import Web3
+import numpy as np
 
+def initialise(self):
+    self.fig = plt.figure()
+    self.ax = self.fig.add_subplot(111, projection='3d')
+    # Setting the axes properties
+    self.ax.set_xlim3d([0.0, 9.0])
+    self.ax.set_xlabel('X')
+    self.ax.set_ylim3d([0.0, 9.0])
+    self.ax.set_ylabel('Y')
 
-abi=json.loads('[{"constant":true,"inputs":[],"name":"get","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes","name":"y","type":"bytes"}],"name":"set","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')
-contract = web3.eth.contract(address="0xc421C7bD9C2b3A3965aB96C8EDa1E8CA8876F3b4", abi=abi)
+    self.ax.set_zlim3d([0.0, 9.0])
+    self.ax.set_zlabel('Z')
+    # f.close()
+    return self
 
-x=encrypt("hello",dictAdd["1"]["pubkey"])
+class Simulator:
+    def __init__(self):
 
-#
-# y=contract.functions.get().call()
-#
-# print(y.decode('utf-8'))
-# #
-transaction = contract.functions.set(x).buildTransaction({
-    'from': "0x660a5FB1d2a8f88aA2C89D473F43dF0b15eD718f",
-    'nonce':web3.eth.getTransactionCount("0x660a5FB1d2a8f88aA2C89D473F43dF0b15eD718f"),
-    })
-private_key = "73d2fa7e4d3678f4b97ebd7e27e739380134e469eb6be4ced7099afa46003a80"
+        self=initialise(self)
+        x=self.ax.scatter3D([],[],[],marker='$'+str(6)+'$',s=300, c='blue', picker = True)
+        print(x.get_properties())
 
-signed_txn = web3.eth.account.signTransaction(transaction, private_key=private_key)
-web3.eth.sendRawTransaction(signed_txn.rawTransaction)
-try:
-    print(decrypt(contract.functions.get().call(),dictAdd["1"]["prikey"]).decode())
-except:
-    print("error")
+Simulator()

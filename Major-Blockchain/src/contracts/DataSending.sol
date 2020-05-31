@@ -29,7 +29,7 @@ contract DataSending is Registration{
 
   function registerCoordinates(int[] memory coordinates) public payable
   {
-    require(transaction==true && registered[pubToMac[msg.sender]].faulty==0);
+    require(transaction==true && blacklisted[msg.sender]<=10 && registered[pubToMac[msg.sender]].faulty==0);
     if(pubToMac[msg.sender]!=0)
     {
       if(registered[pubToMac[msg.sender]].bcs==0 && registered[pubToMac[msg.sender]].participating==0 && msg.value==1 ether)
